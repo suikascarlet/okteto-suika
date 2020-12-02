@@ -1,0 +1,43 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: 10 22 * * *
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+    
+    - name: Login
+      uses: okteto/login@master
+      with:
+        token: ${{ secrets.APITOKEN }}
+    
+    - name: Activate Namespace
+      uses: okteto/namespace@master
+      with:
+        namespace: ${{ secrets.namespace }}
+    
+    - name: Deploy App
+      uses: okteto/apply@master
+      with:
+        namespace: ${{ secrets.namespace }}
+        manifest: k8s.yml
+    
+    - name: "Push changes"
+      uses: okteto/push@master
+      with:
+        namespace: ${{ secrets.namespace }}
+        name: suika
