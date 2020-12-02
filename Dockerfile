@@ -1,14 +1,13 @@
-FROM ubuntu:14.04
+FROM nginx
 
-# install git & curl & unzip & daemon
-RUN apt-get -qq update && \
-    apt-get install -q -y git curl unzip daemon
+# Use Reverse Proxy Config
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# run install script
-RUN mkdir -p /usr/internet/
-ADD install-release.sh /usr/internet/install-release.sh
-RUN chmod +x /usr/internet/install-release.sh
+## Configure Supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+ADD run.sh /run.sh
+
+CMD ["/run.sh"]
 
 EXPOSE 9050
-
-CMD ["bash", "/usr/internet/install-release.sh"]
