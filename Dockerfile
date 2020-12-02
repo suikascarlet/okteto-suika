@@ -7,6 +7,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 ADD run.sh /run.sh
+RUN chmod +x run.sh
 
 CMD ["/run.sh"]
 
