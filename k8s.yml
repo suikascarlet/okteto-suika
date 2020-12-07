@@ -27,7 +27,7 @@ metadata:
 spec:
   type: LoadBalancer 
   ports:
-    - name: http
+    - name: https
       port: 9050
   selector:
     app: suika
