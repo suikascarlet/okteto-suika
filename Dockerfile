@@ -1,14 +1,12 @@
-FROM nginx
+FROM ubuntu-latest
 
-# Use Reverse Proxy Config
-COPY nginx.conf /etc/nginx/nginx.conf
+ENV DEBIAN_FRONTEND=noninteractive
 
-## Configure Supervisor
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN apt-get update -y && apt-get install -y squid && apt-get install -y apache2-utils
+RUN apt-get clean
 
-ADD run.sh /run.sh
-RUN apt-get update && apt-get -y install pwgen supervisor && chmod +x "/run.sh"
+COPY entry.sh /
+COPY squid.conf /etc/squid/squid.conf
+RUN chmod a+x /entry.sh
 
-CMD ["/run.sh"]
-
-EXPOSE 9050
+EXPOSE 3128/tcp
