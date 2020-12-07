@@ -1,5 +1,8 @@
 #!/bin/sh
 
+USERNAME="remila"
+PASSWORD="sakuya"
+
 set -x
 set -e
 
