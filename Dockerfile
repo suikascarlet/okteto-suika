@@ -9,6 +9,6 @@ COPY entry.sh /
 COPY squid.conf /etc/squid/squid.conf
 RUN chmod a+x /entry.sh
 
-EXPOSE 9050/tcp
+EXPOSE 3128/tcp
 
 ENTRYPOINT ["/entry.sh"]
