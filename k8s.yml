@@ -16,7 +16,7 @@ spec:
       - name: suika
         image: okteto.dev/suika:latest
         ports:
-        - containerPort: 9050
+        - containerPort: 3128
         
 ---
     
@@ -28,6 +28,6 @@ spec:
   type: LoadBalancer 
   ports:
     - name: https
-      port: 9050
+      port: 3128
   selector:
     app: suika
