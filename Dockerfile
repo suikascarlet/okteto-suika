@@ -2,11 +2,16 @@ FROM ubuntu
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update -y && apt-get install -y squid && apt-get install -y apache2-utils
-RUN apt-get clean
+RUN apk add --no-cache --virtual .build-deps ca-certificates curl \
+    && mkdir -m 777 /gostbin \
+    && cd /gostbin \
+    && curl -L -H "Cache-Control: no-cache" -o gost.gz https://github.com/ginuerzh/gost/releases/download/v$VER/gost-linux-amd64-$VER.gz \
+    && gzip -d gost.gz \
+    && chmod +x /gostbin/gost \
+    && chgrp -R 0 /gostbin \
+    && chmod -R g+rwX /gostbin
 
 COPY entry.sh /
-COPY squid.conf /etc/squid/squid.conf
 RUN chmod a+x /entry.sh
 
 EXPOSE 3128/tcp
