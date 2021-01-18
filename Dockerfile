@@ -13,4 +13,4 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates curl gzip \
     && chmod -R g+rwX /gostbin
 
 EXPOSE 3128/tcp
-CMD /gostbin/gost -L=ss+mws://chacha20:suika@:$PORT
+CMD /gostbin/gost -L=mws://:$PORT
