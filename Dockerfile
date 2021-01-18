@@ -2,7 +2,7 @@ FROM library/alpine:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apk add --no-cache --virtual .build-deps ca-certificates curl \
+RUN apk add --no-cache --virtual .build-deps ca-certificates curl gzip \
     && mkdir -m 777 /gostbin \
     && cd /gostbin \
     && curl -L -H "Cache-Control: no-cache" -o gost.gz https://github.com/ginuerzh/gost/releases/download/v$VER/gost-linux-amd64-$VER.gz \
