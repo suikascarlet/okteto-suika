@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM library/alpine:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
