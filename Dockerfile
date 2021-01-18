@@ -1,6 +1,7 @@
 FROM library/alpine:latest
 
 ENV VER=2.11.1
+ENV PORT=3128
 
 RUN apk add --no-cache --virtual .build-deps ca-certificates curl gzip \
     && mkdir -m 777 /gostbin \
@@ -11,9 +12,5 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates curl gzip \
     && chgrp -R 0 /gostbin \
     && chmod -R g+rwX /gostbin
 
-COPY entry.sh /
-RUN chmod a+x /entry.sh
-
 EXPOSE 3128/tcp
-
-ENTRYPOINT ["/entry.sh"]
+CMD /gostbin/gost -L=http2://:3128
