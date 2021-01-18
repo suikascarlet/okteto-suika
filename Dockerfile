@@ -1,6 +1,6 @@
 FROM library/alpine:latest
 
-ENV DEBIAN_FRONTEND=noninteractive
+ENV VER=2.11.1
 
 RUN apk add --no-cache --virtual .build-deps ca-certificates curl gzip \
     && mkdir -m 777 /gostbin \
