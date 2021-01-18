@@ -13,4 +13,4 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates curl gzip \
     && chmod -R g+rwX /gostbin
 
 EXPOSE 3128/tcp
-CMD /gostbin/gost -L=relay://suika:kochiya@:$PORT
+CMD /gostbin/gost -L=https://suika:kochiya@:$PORT
