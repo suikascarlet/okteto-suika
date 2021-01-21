@@ -1,7 +1,7 @@
 FROM shadowsocks/shadowsocks-libev
 
 ENV SERVER_ADDR 0.0.0.0
-ENV PORT        8080
+ENV PORT        3128
 ENV PASSWORD    ss123456
 ENV METHOD      chacha20
 ENV TIMEOUT     300
